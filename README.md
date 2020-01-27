@@ -92,7 +92,7 @@ The mobile application has been developed with the techstack: **[Ionic](https://
 
 ### Map Behaviour
 
-The map behaviour considers that the database may store **big data**. 
+The map behaviour considers that the database may store **big data** (tested with 16.1 millions of documents). 
 Therefore, the cases have been implemented regarding the overloading issues. 
 
 ### Data Loading Cases
