@@ -25,6 +25,8 @@ For real-time data streaming, MongoDB [change streams](https://docs.mongodb.com/
 
 ### Server
 
+It requires NodeJs environment. Please [install NodeJs](https://nodejs.org/en/download/)
+
 Firstly command ```npm install``` to load node_modules on the backend directory
 
 Then:
@@ -33,6 +35,8 @@ Then:
 2. ```npm run test```
 
 ## Frontend
+
+It requires NodeJs environment. Please [install NodeJs](https://nodejs.org/en/download/)
 
 Firstly command ```npm install``` to load node_modules on the frontend directory
 
