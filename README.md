@@ -84,7 +84,7 @@ There is also an option to manually insert single data on the config file.
 
 ## Frontend
 
-The mobile application has been developed with the techstack: **[Ionic](https://ionicframework.com/getting-started), [Angular 8](https://angular.io/), [SocketIOClient](https://socket.io/docs/client-api/), [Jasmine](https://jasmine.github.io/), [Karma](https://angular.io/guide/testing), [Leaflet](https://leafletjs.com/), [Turf](https://turfjs.org/), [ChartJs](https://www.chartjs.org/)**
+The mobile application has been developed with the techstack: **[Ionic](https://ionicframework.com/getting-started), [Angular 8](https://angular.io/), [SocketIOClient](https://socket.io/docs/client-api/), [Jasmine](https://jasmine.github.io/), [Karma](https://angular.io/guide/testing), [Leaflet](https://leafletjs.com/), [TurfJs](https://turfjs.org/), [ChartJs](https://www.chartjs.org/)**
 
 ### Map Behaviour
 
@@ -94,9 +94,10 @@ Therefore, the cases have been implemented regarding the overloading issues.
 ### Data Loading Cases
 
 1. The map initializes and then the map page requests data for the specified parameters: map box (bounds) and period (start and end dates).
-The API returns the download data in the map bounds and dates to avoid loading enourmous amount of data.
+The API returns the download data in the map bounds ([see Mongo Geospatial](https://docs.mongodb.com/manual/reference/operator/query-geospatial/)) and dates to avoid loading enourmous amount of data.
    - The map page remembers the lastly queried parameters and does not fetch data for the same parameters.
      - When the user gets out of the last queried map bounds; the page creates a new request event.
+       - The previous and current map bounds are compared by [TurfJs](https://turfjs.org/) on the client-side.
      - When the user changes the start and end dates; the page creates a new request event.
      - The events are queued and debounced in case of multiple conflicting requests. The last request event is taken into consideration.
      
