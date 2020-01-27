@@ -1,0 +1,9 @@
+.toolbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    ion-button {
+        margin-right: 10px;
+    }
+}

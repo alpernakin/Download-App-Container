@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+
+        <app-toolbar-content [header]="'Downloads'" (onRefreshClicked)="onRefreshClicked()"></app-toolbar-content>
+
+        <div>
+            <ion-item>
+                <ion-label>Start Date</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY HH:mm" [(ngModel)]="startDateString"
+                    (ionChange)="onDateChangedCallback($event)" (ionCancel)="startDateString = null"></ion-datetime>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>End Date</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY HH:mm" [(ngModel)]="endDateString"
+                    (ionChange)="onDateChangedCallback($event)" (ionCancel)="endDateString = null">
+                </ion-datetime>
+            </ion-item>
+        </div>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-map [config]="mapConfig" (onMapMoveAction)="onMapMoveActionCallback($event)"></app-map>
+</ion-content>

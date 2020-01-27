@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-toolbar>
+        <app-toolbar-content [header]="'Monthly Downloads'" (onRefreshClicked)="loadData()"></app-toolbar-content>
+    </ion-toolbar>
+
+    <div>
+        <ion-item>
+            <ion-label>Choose a Year</ion-label>
+            <ion-datetime displayFormat="YYYY" [(ngModel)]="dateString" (ionChange)="onDateChangedCallback($event)">
+            </ion-datetime>
+        </ion-item>
+    </div>
+</ion-header>
+
+<ion-content>
+    <app-bar-chart [data]="chartData" [dataLabel]="'Downloads'" [chartLabels]="months"></app-bar-chart>
+</ion-content>

@@ -1,0 +1,9 @@
+<ion-header>
+    <ion-toolbar>
+        <app-toolbar-content [header]="'Downloads By Country'" (onRefreshClicked)="loadData()"></app-toolbar-content>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-stat-list [items]="items"></app-stat-list>
+</ion-content>

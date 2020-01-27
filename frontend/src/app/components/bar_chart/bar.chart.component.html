@@ -1,0 +1,10 @@
+<div *ngIf="chartData && chartData.length && chartLabels && chartOptions; else noData">
+    <div class="canvas-container">
+        <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [legend]="true"
+            [options]="chartOptions">
+        </canvas>
+    </div>
+</div>
+<ng-template #noData>
+    Chart has no data to show!
+</ng-template>
