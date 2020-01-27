@@ -80,7 +80,7 @@ export class MapTabPage implements OnDestroy, OnInit {
     }
 
     ionViewDidEnter() {
-        // a work around because of the bug with leaflet map
+        // a work around because of the problem with leaflet map
         // when the map initialized on ngOnInit or others, it fails the load the tiles
         // so it checks if the map already initialized each time page viewed, to prevent multiple inits
         if (!this._mapInitialized)
@@ -110,6 +110,7 @@ export class MapTabPage implements OnDestroy, OnInit {
                 // if the map is already waiting for data
                 // then ignore the new data arrived
                 if (this._dataLoading) return;
+                if (!this._mapInitialized) return;
 
                 let filteredData = this.filterStreamData(...data);
                 // then map them to markers
