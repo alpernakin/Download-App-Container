@@ -16,7 +16,8 @@ For real-time data streaming, MongoDB [change streams](https://docs.mongodb.com/
 1. Shut down any running [Mongod service](https://docs.mongodb.com/manual/reference/program/mongod/#bin.mongod) (it can be stopped on services)
 
 2. Command prompt on the MongoDB directory your_mongodb_dir/Server/your_mongodb_version/bin
-   - Start a new mongod instance with --replSet, --dbPath and --port configuration
+   - Start a new mongod instance with --replSet, --dbPath and --port configuration.
+   - **Important** Please create the --dbPath directory in advance.
    - Example command: ```mongod --port 27017 --dbpath ../data/db0 --replSet rs0 --bind_ip 127.0.0.1```
    
 3. Connect to a mongo shell: mongo.exe under your_mongodb_dir/Server/your_mongodb_version/bin
@@ -92,7 +93,7 @@ The mobile application has been developed with the techstack: **[Ionic](https://
 
 ### Map Behaviour
 
-The map behaviour considers that the database may store **big data**. 
+The map behaviour considers that the database may store **big data** (tested with 16.1 millions of documents). 
 Therefore, the cases have been implemented regarding the overloading issues. 
 
 ### Data Loading Cases
