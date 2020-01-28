@@ -3,9 +3,32 @@ Download real-time map data and statistics representation
 
 # Installation
 
-## Backend
+## Docker
 
-### MongoDB
+**Important** Before the installation, please configure the host info for MongoDB connections on data-producer and backend projects. The host must be set to 'mongo'.
+
+Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for backend mongo configuration.
+Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for data-producer mongo configuration.
+
+1. On the Download-App-Container directory, open shell and command: ```docker-compose --build```
+   - Recommended to see the data-producer configuration before running the script, as you can configure data insertion on the data-producer docker image.
+   
+2. Wait until five images are built: mongo, replica_setup, data_producer, backend, frontend
+   
+3. Please see the running app on the url ```http://localhost:4200```
+
+For details please see [docker-compose.yml](https://github.com/alpernakin/Download-App-Container/blob/master/docker-compose.yml)
+
+## Manual
+
+**Important** Before the installation, please configure the host info for MongoDB connections on data-producer and backend projects. The host must be set to 'localhost'.
+
+Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for backend mongo configuration.
+Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for data-producer mongo configuration.
+
+### Backend
+
+#### MongoDB
 
 Please [download MongoDB](https://www.mongodb.com/download-center/community). It will install the MongoDB server on the port 27017 by default (you can change it by setting a new port on [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js))
 
@@ -24,7 +47,7 @@ For real-time data streaming, MongoDB [change streams](https://docs.mongodb.com/
    - Initiate the replica set with the command: ```rs.initiate()```
    - See status and configuration with the commands: ```rs.conf()```, ```rs.status()```
 
-### Server
+#### Server
 
 [Please install NodeJs.](https://nodejs.org/en/download/)
 
@@ -34,8 +57,9 @@ Then:
 
 1. ```npm run start```
 2. ```npm run test```
+   - The tests are independent from other apps.
 
-## Frontend
+### Frontend
 
 [Please install NodeJs.](https://nodejs.org/en/download/)
 
@@ -45,16 +69,17 @@ Then:
 
 1. ```npm run start```
 2. ```npm run test```
+   - The tests are independent from other apps.
 
 ###### Note: If the first test is interrupted by uncaught dummy error, please try again.
 
-## Data-Producer
+### Data-Producer
 
 Firstly command ```npm install``` to load node_modules on the data-producer directory
 
 Then: ```npm run start```
 
-###### Configuration: The data production and insertion options are on the [app.config.js file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/assets/app.config.js)
+###### Configuration: The data production and insertion options are on the [app.config.js file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js)
 
 # Documentation
 
@@ -93,8 +118,7 @@ The mobile application has been developed with the techstack: **[Ionic](https://
 
 ### Map Behaviour
 
-The map behaviour considers that the database may store **big data** (tested with 16.1 millions of documents). 
-Therefore, the cases have been implemented regarding the overloading issues. 
+The map behaviour considers that the database may store **big data**. The map page has been tested with 16.7 millions of download data in two years of period. Therefore, the cases have been implemented regarding the overloading issues. 
 
 ### Data Loading Cases
 
@@ -105,7 +129,6 @@ The API returns the download data in the map bounds ([see Mongo Geospatial](http
        - The previous and current map bounds are compared by [TurfJs](https://turfjs.org/) on the client-side.
      - When the user changes the start and end dates; the page creates a new request event.
      - The events are queued and debounced in case of multiple conflicting requests. The last request event is taken into consideration.
-     
 
 2. The map page constantly listens the socket that streams real-time download data since the beginning.
 If the streamed data meets the requirements (date-time filter), it adds them on the map. While loading data from the service, it ignores to add the streamed data to prevent duplicates.
@@ -122,6 +145,8 @@ The download markers are clustered with [marker cluster](https://github.com/Leaf
 # Future Work
 
 On the backend, the socket clients can be classified depending on the client necessity to stream only relevant data. It currently streams all new data.
+
+The map restrictions can be enhanced depending on the expected amount of data. It would be heavy for approx. 1-2 years of period with over 15 millions of data.
 
 The rest of the future work can be found by **todo** keyword on the project files.
 
