@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "../assets/app.config";
+import config from "../app.config";
 
 class Connection {
 

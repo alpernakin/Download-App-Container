@@ -5,8 +5,10 @@ WORKDIR /src/download_app/frontend
 COPY package*.json ./
 
 RUN npm install --silent
+# for angular commands
+RUN npm install -g @angular/cli  --silent
+
 COPY . .
 
-EXPOSE 4200
-
-CMD ["npm", "start"]
+# serve it
+CMD ["ng", "serve", "--host", "0.0.0.0"]

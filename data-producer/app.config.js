@@ -17,7 +17,7 @@ const config = {
              * consider this if batch process is preferred 
              * the amount of data entry at one batch insertion
              */
-            batchCapacity: 100,
+            batchCapacity: 1000,
             /** 
              * interval in ms 
              * if the option 'single' preferred, the app inserts single data in the given interval
@@ -25,7 +25,7 @@ const config = {
              */
             interval: 1000,
             /** how many times insertion process runs with the given interval */
-            round: 100,
+            round: 1000,
         },
 
         /** 
@@ -46,6 +46,7 @@ const config = {
     },
 
     mongoDb: {
+        // if the docker runs, please switch from 'localhost' to 'mongo'
         host: "localhost",
         port: 27017,
         database: "my_db"

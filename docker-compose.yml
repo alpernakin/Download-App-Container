@@ -1,5 +1,6 @@
 version: "3.1"
 services:
+    # wait for replica to be initiated
     backend:
         build: ./backend
         ports:
@@ -15,29 +16,36 @@ services:
             - "4200:4200"
         depends_on:
             - backend
-    
+
+    # wait for replica to be initiated
     data_producer:
-        build: ./data-producer  
-        ports: 
+        build: ./data-producer
+        ports:
             - "8001:8001"
-        depends_on: 
+        depends_on:
             - replica_setup
         environment:
             WAIT_HOSTS: mongo:27017
 
+    # we need to initiate replica set in the mongo container
+    # wait for mongo image to run
     replica_setup:
         build: ./mongo_replica
-        depends_on: 
+        depends_on:
             - mongo
         environment:
             WAIT_HOSTS: mongo:27017
 
+    # if the apps use the mongo server in docker container
+    # they must switch the mongo host info from 'localhost' to 'mongo'
     mongo:
         image: mongo
+        # this container name corresponds the container in replica setup shell file
+        # be careful if you change it
         container_name: mongo_db_1
         command: "mongod --replSet rs0"
         ports:
             - "27017:27017"
-        expose: 
+        expose:
             - "27017"
         restart: always
