@@ -5,7 +5,7 @@ import downloadModel from './mongodb/download.schema.js';
 import uuid from 'uuid';
 import countries from './assets/countries.js';
 import { setInterval, clearInterval } from 'timers';
-import config from './assets/app.config.js';
+import config from './app.config.js';
 import timezones from './assets/timezones.js';
 
 var service = new DownloadService(downloadModel);

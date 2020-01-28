@@ -1,0 +1,43 @@
+version: "3.1"
+services:
+    backend:
+        build: ./backend
+        ports:
+            - "7779:7779"
+        depends_on:
+            - replica_setup
+        environment:
+            WAIT_HOSTS: mongo:27017
+
+    frontend:
+        build: ./frontend
+        ports:
+            - "4200:4200"
+        depends_on:
+            - backend
+    
+    data_producer:
+        build: ./data-producer  
+        ports: 
+            - "8001:8001"
+        depends_on: 
+            - replica_setup
+        environment:
+            WAIT_HOSTS: mongo:27017
+
+    replica_setup:
+        build: ./mongo_replica
+        depends_on: 
+            - mongo
+        environment:
+            WAIT_HOSTS: mongo:27017
+
+    mongo:
+        image: mongo
+        container_name: mongo_db_1
+        command: "mongod --replSet rs0"
+        ports:
+            - "27017:27017"
+        expose: 
+            - "27017"
+        restart: always

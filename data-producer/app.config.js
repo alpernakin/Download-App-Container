@@ -17,7 +17,7 @@ const config = {
              * consider this if batch process is preferred 
              * the amount of data entry at one batch insertion
              */
-            batchCapacity: 1000,
+            batchCapacity: 100,
             /** 
              * interval in ms 
              * if the option 'single' preferred, the app inserts single data in the given interval
@@ -25,7 +25,7 @@ const config = {
              */
             interval: 1000,
             /** how many times insertion process runs with the given interval */
-            round: 10000,
+            round: 100,
         },
 
         /** 

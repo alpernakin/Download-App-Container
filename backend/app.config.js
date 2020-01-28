@@ -4,7 +4,7 @@ const config = {
     },
 
     mongoDb: {
-        host: "localhost",
+        host: "mongo",
         port: 27017,
         database: "my_db"
     }
