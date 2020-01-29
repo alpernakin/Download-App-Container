@@ -11,9 +11,9 @@ Please see the [app.config.js](https://github.com/alpernakin/Download-App-Contai
 Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for data-producer mongo configuration.
 
 1. On the Download-App-Container directory, open shell and command: ```docker-compose --build```
-   - Recommended to see the data-producer configuration before running the script, as you can configure data insertion on the data-producer docker image.
+   - Recommended to see the data-producer configuration before running the script to configure data insertion options based on your needs.
    
-2. Wait until five images are built: mongo, replica_setup, data_producer, backend, frontend
+2. Wait until five containers are built: mongo, replica_setup, data_producer, backend, frontend
    
 3. Please see the running app on the url ```http://localhost:4200```
 
