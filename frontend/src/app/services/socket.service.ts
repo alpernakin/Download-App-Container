@@ -51,7 +51,8 @@ export class SocketService implements OnDestroy {
     }
 
     /**
-     * streams data chunks from the server on a registered event id
+     * streams batch data from the server on a registered event id
+     * the reason for release batch data internally on the UI application is to avoid lagging the system in case of receiving huge amount of data at once
      * if the socket is disconnected, it tries to connect back
      * @param eventId the event listen on the server socket
      * @param options.batchInterval the duration to collect data
