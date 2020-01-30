@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, interval, Subscription } from 'rxjs';
 import * as io from 'socket.io-client';
 import { socketConfig } from 'src/config';
 
@@ -65,28 +65,34 @@ export class SocketService implements OnDestroy {
 
     private createBatchStream<T>(socketClient: SocketIOClient.Socket, eventId: string, batchInterval: number): Observable<T[]> {
         return new Observable(observer => {
-            if (!socketClient) {
-                observer.error(new Error("Socket client is not available"));
-                observer.complete();
+            let error = (errorMessage: string) => {
+                observer.error(errorMessage);
             }
             // batch data chunk to collect
             let batchData: T[] = [];
-            // for each entry, it saves in the chunk, which will be emitted
-            socketClient.on(eventId, (data: T) => batchData.push(data));
-            // the timer emits the data chunk on a regular basis
-            let timer = setInterval(() => {
-                // emit and empty the chunk
+            // create a timer observable
+            let createInterval = (_interval): Subscription => interval(_interval).subscribe(_ => {
+                // the timer emits the data chunk on a regular basis
                 observer.next(batchData);
                 batchData = [];
-            }, batchInterval);
-            // on connection error kill the timer
+            });
+            // if the socket is not there
+            if (!socketClient) error("Socket client is not available");
+            // start the batch timer
+            let batchIntervalSubscription = createInterval(batchInterval);
+            // for each entry, collect in the batch
+            socketClient.on(eventId, (data: T) => batchData.push(data));
+            // on connection error with the socket, clear the reference
             socketClient.on('connect_error', () => {
-                if (!this.isConnected() && timer) {
-                    observer.error('stream socket disconnected!');
-                    observer.complete();
-                    clearInterval(timer);
-                    timer = null;
-                }
+                // stop the timer
+                if (batchIntervalSubscription)
+                    batchIntervalSubscription.unsubscribe();
+            });
+            // on connect, start the batch timer again
+            socketClient.on('connect', () => {
+                // if it is not created yet or unsubscribed, then create again
+                if (!batchIntervalSubscription || batchIntervalSubscription.closed)
+                    batchIntervalSubscription = createInterval(batchInterval);
             });
         });
     }

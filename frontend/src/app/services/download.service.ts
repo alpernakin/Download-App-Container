@@ -30,10 +30,7 @@ export class DownloadService {
             // map the data from the socket
             .pipe<DownloadResultItem[]>(this._mapDownloadDataCallback())
             // emit the data in the application
-            .subscribe(data => {
-                console.log(data);
-                this.downloadDataStreamer$.next(data)
-            });
+            .subscribe(data => this.downloadDataStreamer$.next(data));
     }
 
     /** general mapping callback for download result item response */

@@ -49,21 +49,21 @@ export class RequestService {
     public processRequest<T>(request: Observable<any>, blockUI: BlockUI = null): Observable<T> {
         // unique ID through timestamp in milliseconds
         let loaderId = new Date().getTime().toString();
-        // if the request needs to block the UI
+        // if the request needs to block the UI, max duration 5 seconds
         if (blockUI)
-            this.loading.create({ id: loaderId, message: blockUI.text, spinner: "dots" })
+            this.loading.create({ id: loaderId, message: blockUI.text, spinner: "dots", duration: 5000 })
                 .then(loader => loader.present());
 
         return request.pipe(
             map(response => {
                 if (blockUI)
-                    this.loading.dismiss(loaderId);
+                    this.loading.dismiss(loaderId).catch(_ => { });
 
                 return response;
             }),
             catchError(err => {
                 if (blockUI)
-                    this.loading.dismiss(loaderId);
+                    this.loading.dismiss(loaderId).catch(_ => { });
 
                 let errorMessage = "";
                 switch (err.status) {
