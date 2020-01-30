@@ -32,21 +32,31 @@ describe('MapComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('initialize the map', async () => {
+	it('initialize the map', (done: DoneFn) => {
 		component.config = defaultConfig;
-		component.initialize().then(_ => expect(component.map).toBeTruthy())
+		component.initialize().then(_ => {
+			expect(component.map).toBeTruthy();
+			// end the async test
+			done();
+		});
 	});
 
-	it('should fail without config', async () => {
-		component.initialize()
-			.catch(err => expect(err).toEqual(new Error("Map configuration is required.")))
+	it('should fail without config', (done: DoneFn) => {
+		component.initialize().catch(err => {
+			expect(err).toEqual(new Error("Map configuration is required."))
+			// end the async test
+			done();
+		});
 	});
 
-	it('should fail without base url', async () => {
+	it('should fail without base url', (done: DoneFn) => {
 		component.config = defaultConfig;
 		component.config.baseURL = null;
-		component.initialize()
-			.catch(err => expect(err).toEqual(new Error("Map base URL is required.")));
+		component.initialize().catch(err => {
+			expect(err).toEqual(new Error("Map base URL is required."));
+			// end the async test
+			done();
+		});
 	});
 
 	it('should get corresponding bounds', () => {

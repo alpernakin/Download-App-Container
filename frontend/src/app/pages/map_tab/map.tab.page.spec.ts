@@ -106,33 +106,49 @@ describe('MapTabPage', () => {
         expect(component.checkIfPageNeedsData(lastQueriedParameters, currentParameters)).toBeTruthy();
     });
 
-    it('should create request event when refresh clicked', async () => {
-        component.onRequestEvent.subscribe(event => expect(event).toBeTruthy());
+    it('should create request event when refresh clicked', (done: DoneFn) => {
+        component.onRequestEvent.subscribe(event => {
+            expect(event).toBeTruthy();
+            // end the async test
+            done();
+        });
         component.onRefreshClicked(null);
     });
 
-    it('should create request event when map move', async () => {
-        component.onRequestEvent.subscribe(event => expect(event).toBeTruthy());
+    it('should create request event when map move', (done: DoneFn) => {
+        component.onRequestEvent.subscribe(event => {
+            expect(event).toBeTruthy();
+            // end the async test
+            done();
+        });
         component.onMapMoveActionCallback(null);
     });
 
-    it('should create request event when date change', async () => {
-        component.onRequestEvent.subscribe(event => expect(event).toBeTruthy());
+    it('should create request event when date change', (done: DoneFn) => {
+        component.onRequestEvent.subscribe(event => {
+            expect(event).toBeTruthy();
+            // end the async test
+            done();
+        });
         component.onDateChangedCallback(null);
     });
 
-    it('should refresh the map items on data load', async () => {
+    it('should refresh the map items on data load', (done: DoneFn) => {
         component.loadData(null, null, null).subscribe(_ => {
             expect(mapComponentSpy.clearLayers).toHaveBeenCalled();
             expect(mapComponentSpy.addMarkers).toHaveBeenCalled();
+            // end the async test
+            done();
         });
     });
 
-    it('should refresh last queried parameters on data load', async () => {
+    it('should refresh last queried parameters on data load', (done: DoneFn) => {
         let dummyBounds = new MapBound(new LatLong(5, 5), new LatLong(5, 8), new LatLong(2, 8), new LatLong(2, 5));
         let expectedData = new PageParameters(dummyBounds, null, null);
         component.loadData(dummyBounds, null, null).subscribe(_ => {
             expect(component.lastQueriedParams).toEqual(expectedData);
+            // end the async test
+            done();
         });
     });
 

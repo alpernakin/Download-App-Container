@@ -36,23 +36,27 @@ describe('RequestService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should make a request', async () => {
+    it('should make a request', (done: DoneFn) => {
         // stub the http client method
         httpClientSpy.get.and.callFake(() => of(true));
         // run the test
         service.get<boolean>("dummy_endpoint", null, null).subscribe(_ => {
             expect(httpClientSpy.get).toHaveBeenCalled();
+            // end the async test
+            done();
         });
     })
 
-    it('should emit global server error', async () => {
+    it('should emit global server error', (done: DoneFn) => {
         service.serverError$.subscribe(err => {
             expect(err).toBe(ServerError.InternalServerError);
+            // end the async test
+            done();
         });
         service.handleError({ status: 500 });
     });
 
-    it('should show and hide the block UI loader', async () => {
+    it('should show and hide the block UI loader', (done: DoneFn) => {
         // stub the loading controller methods
         loadingSpy.create.and.callFake(() => Promise.resolve(new FakeLoader()));
         loadingSpy.dismiss.and.callFake(() => Promise.resolve(true));
@@ -60,17 +64,23 @@ describe('RequestService', () => {
         service.processRequest(of("dummy"), new BlockUI()).subscribe(_ => {
             expect(loadingSpy.create).toHaveBeenCalled();
             expect(loadingSpy.dismiss).toHaveBeenCalled();
+            // end the async test
+            done();
         });
     });
 
-    it('should alert on server error', async () => {
+    it('should alert on server error', (done: DoneFn) => {
         // stub the alert controller method
         alertSpy.create.and.callFake(() => Promise.resolve(new FakeLoader()));
         // simulate an error response
-        let fakeErrorObservable = new Observable(observer => observer.error(new Error("dummy")))
+        let fakeErrorObservable = new Observable(observer => observer.error(new Error("dummy")));
+        // stub the method
+        service.handleError = (err): Observable<any> => of("Nothing");
         // run the test
         service.processRequest(fakeErrorObservable).subscribe(_ => {
             expect(alertSpy.create).toHaveBeenCalled();
+            // end the async test
+            done();
         });
     });
 });

@@ -26,7 +26,7 @@ export class DownloadService {
     /** starts streaming data on the given event id */
     private startStreaming() {
         // use the socket dependency to start
-        this.socket.streamData<DownloadResultItem>("download_data_stream", { batchInterval: 1000 })
+        this.socket.streamData<DownloadResultItem>("download_data_stream", { batchIntervalMs: 1000 })
             // map the data from the socket
             .pipe<DownloadResultItem[]>(this._mapDownloadDataCallback())
             // emit the data in the application

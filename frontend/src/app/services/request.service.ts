@@ -79,7 +79,7 @@ export class RequestService {
     }
 
     /** server error handler callback */
-    public handleError(err: any) {
+    public handleError(err: any): Observable<any> | Observable<never> {
         // emit the error throughtout the application
         this.serverError$.next(err.status);
         // return the observable error

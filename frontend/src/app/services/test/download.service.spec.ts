@@ -70,23 +70,27 @@ describe('DownloadService', () => {
             }
         });
 
-        it('should return mapped downloads in bounds and dates', () => {
+        it('should return mapped downloads in bounds and dates', (done: DoneFn) => {
             startDate = 1485365532000;
             endDate = 1579973532000;
             // run the test
             service.getDownloadsInBounds(mapBox, startDate, endDate).subscribe(data => {
                 expect(requestSpy.get).toHaveBeenCalled();
                 expect(data).toEqual(expectedData);
+                // end the async test
+                done();
             });
         });
 
-        it('should return mapped downloads in bounds without dates', () => {
+        it('should return mapped downloads in bounds without dates', (done: DoneFn) => {
             startDate = null;
             endDate = null;
             // run the test
             service.getDownloadsInBounds(mapBox, startDate, endDate).subscribe(data => {
                 expect(requestSpy.get).toHaveBeenCalled();
                 expect(data).toEqual(expectedData);
+                // end the async test
+                done();
             });
         });
     });
@@ -103,11 +107,13 @@ describe('DownloadService', () => {
             service = TestBed.get(DownloadService);
         });
 
-        it('should return monthly downloads', () => {
+        it('should return monthly downloads', (done: DoneFn) => {
             // run the test
             service.getMonthlyDownloads(2019).subscribe(data => {
                 expect(requestSpy.get).toHaveBeenCalled();
                 expect(data).toEqual(dummyDataFromServer);
+                // end the async test
+                done();
             });
         });
     });
@@ -124,11 +130,13 @@ describe('DownloadService', () => {
             service = TestBed.get(DownloadService);
         });
 
-        it('should return downloads by country', () => {
+        it('should return downloads by country', (done: DoneFn) => {
             // run the test
             service.getDownloadsByCountry().subscribe(data => {
                 expect(requestSpy.get).toHaveBeenCalled();
                 expect(data).toEqual(dummyDataFromServer);
+                // end the async test
+                done();
             });
         });
     });
@@ -145,11 +153,13 @@ describe('DownloadService', () => {
             service = TestBed.get(DownloadService);
         });
 
-        it('should return downloads by time of day', () => {
+        it('should return downloads by time of day', (done: DoneFn) => {
             // run the test
             service.getDownloadsByTimeOfDay().subscribe(data => {
                 expect(requestSpy.get).toHaveBeenCalled();
                 expect(data).toEqual(dummyDataFromServer);
+                // end the async test
+                done();
             });
         });
     });
