@@ -111,7 +111,7 @@ export class MapTabPage implements OnDestroy, OnInit {
                 // then ignore the new data arrived
                 if (this._dataLoading) return;
                 if (!this._mapInitialized) return;
-                console.log(data);
+                
                 let filteredData = this.filterStreamData(...data);
                 // then map them to markers
                 let downloadMarkers = filteredData.map(item => this.createDownloadMarker(item));
