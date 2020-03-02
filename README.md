@@ -1,5 +1,6 @@
 # Download-App-Container
-Download real-time map data and statistics representation.
+
+Real-time and historical **download** data represantation. There are two major components for representation: map & statistics.
 
 **Frontend**: A mobile application, implemented with Ionic, Angular, Jasmine, Karma. The application represents real-time and historical download points on a map, and shows example statistics comparisons.
 
