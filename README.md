@@ -1,11 +1,11 @@
 # Download-App-Container
 Download real-time map data and statistics representation.
 
-**Frontend**: A mobile application, implemented with Ionic, Angular, Jasmine, Karma. The application streams and represents the download points on a map and some example statistics.
+**Frontend**: A mobile application, implemented with Ionic, Angular, Jasmine, Karma. The application represents real-time and historical download points on a map, and shows example statistics comparisons.
 
-**Backend**: API, implemented with ExpressJ, Mongoose, Socket.io, Chai and Mocha. The API serves the download points and streams them, besides, it serves some statistics info as well.
+**Backend**: API, implemented with ExpressJ, Mongoose, Socket.io, Chai and Mocha. The API serves the download points and streams them. Besides that, it serves some statistics data.
 
-**Data-Producer**: Automatically produces and inserts dummy data into the Mongo database.
+**Data-Producer**: Feeds the Mongo database with dummy data. This app is well important for testing real-time data streaming.
 
 # Installation
 
