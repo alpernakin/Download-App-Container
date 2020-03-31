@@ -30,14 +30,14 @@ For details please see [docker-compose.yml](https://github.com/alpernakin/Downlo
 
 **Important** Before the installation, please configure the host info for MongoDB connections on data-producer and backend projects. The host must be set to 'localhost'.
 
-Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for backend mongo configuration.
-Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for data-producer mongo configuration.
+Please see the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for **backend** mongo configuration.
+Please see the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for **data-producer** mongo configuration.
 
 ### Backend
 
 #### MongoDB
 
-Please [download MongoDB](https://www.mongodb.com/download-center/community). It will install the MongoDB server on the port 27017 by default (you can change it by setting a new port on [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js))
+Please [download MongoDB](https://www.mongodb.com/download-center/community). It will install the MongoDB server on the port 27017 by default (you can change it by setting a new port on [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js))
 
 For real-time data streaming, MongoDB [change streams](https://docs.mongodb.com/manual/changeStreams/) require replica sets, therefore we set up replicas, please follow the instructions:
 
@@ -94,25 +94,23 @@ Then: ```npm run start```
 
 The API server has been developed with the techstack: **[ExpressJs](https://expressjs.com/), [Socket.IO](https://socket.io/), [Mongoose (ODM)](https://mongoosejs.com/), [Chai](https://www.chaijs.com/), [Mocha](https://mochajs.org/), [TestDouble](https://github.com/testdouble/testdouble.js)**
 
-**App config** see the file [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js)
+For **mongoDB schema and indexes** see the [download.schema file](https://github.com/alpernakin/Download-App-Container/blob/master/backend/mongodb/download.schema.js)
 
-**MongoDB schema and indexes** see the file [download.schema.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/mongodb/download.schema.js)
+For **unit testing**, please see the files under [test folder](https://github.com/alpernakin/Download-App-Container/tree/master/backend/test) folder. File naming: `<your_file_name>.test.js`.
 
-**Validators** see the file [validators.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/validator.js)
+### API Routes:
 
-**Socket for real-time streaming** see the file [socket.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/socket.js)
-
-**Test** see the files under [test folder](https://github.com/alpernakin/Download-App-Container/tree/master/backend/test) folder. File naming: `your_file_name.test.js`
-
-**Routes, Api Throttle, Error Handling** see the file [middleware.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/middleware.js)
-
-### Current Routes:
-
-1. `/api/download/getInBounds?bl_lng=5&bl_lat=2&tr_lng=8&tr_lat=2&startDate=1577889314000&endDate=1580135714000`. 
-   - Optional query params: `startDate` and `endDate`
+1. `/api/download/getInBounds?bl_lng=5&bl_lat=2&tr_lng=8&tr_lat=2&startDate=1577889314000&endDate=1580135714000`.
+   - **bl_lng** bottom-left longitude, *required*
+   - **bl_lat** bottom-left latitude, *required*
+   - **tr_lng** top-right longitude, *required*
+   - **tr_lat** top-right latitude, *required*
+   - **startDate** minimum download date in milliseconds, *optional*
+   - **endDate** maximum download date in milliseconds, *optional*
 2. `/api/download/getMonthly?year=2019`
 3. `/api/download/getByCountry`
 4. `/api/download/getByTimeOfDay`
+
 ## Data Producer
 
 The data-producer is a simple program for data insertion into our MongoDB database. It also helps a lot to test real-time data streaming.
