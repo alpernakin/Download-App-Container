@@ -14,8 +14,8 @@ Real-time and historical **download** data represantation. There are two major c
 
 **Important** Before the installation, please configure the host info for MongoDB connections on data-producer and backend projects. The host must be set to 'mongo'.
 
-Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for backend mongo configuration.
-Please see the [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for data-producer mongo configuration.
+Please see the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/backend/app.config.js) for **backend** mongo configuration.
+Please see the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js) for **data-producer** mongo configuration.
 
 1. On the Download-App-Container directory, open shell and command: ```docker-compose --build```
    - Recommended to see the data-producer configuration before running the script to configure data insertion options based on your needs.
@@ -86,7 +86,7 @@ Firstly command ```npm install``` to load node_modules on the data-producer dire
 
 Then: ```npm run start```
 
-###### Configuration: The data production and insertion options are on the [app.config.js file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js)
+###### Configuration: The data production and insertion options are on the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/app.config.js)
 
 # Documentation
 
@@ -115,7 +115,7 @@ For **unit testing**, please see the files under [test folder](https://github.co
 ## Data Producer
 
 The data-producer is a simple program for data insertion into our MongoDB database. It also helps a lot to test real-time data streaming.
-It inserts single or batch (randomly generated) data in the given interval and number on [app.config.js](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/assets/app.config.js) file.
+It inserts single or batch (randomly generated) data in the given interval and number on the [app.config file](https://github.com/alpernakin/Download-App-Container/blob/master/data-producer/assets/app.config.js) file.
 There is also an option to manually insert single data on the config file.
 
 ## Frontend
