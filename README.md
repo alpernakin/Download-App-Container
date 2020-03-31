@@ -101,13 +101,14 @@ For **unit testing**, please see the files under [test folder](https://github.co
 ### API Routes:
 
 1. `/api/download/getInBounds?bl_lng=5&bl_lat=2&tr_lng=8&tr_lat=2&startDate=1577889314000&endDate=1580135714000`.
-   - **bl_lng** bottom-left longitude, *required*
-   - **bl_lat** bottom-left latitude, *required*
-   - **tr_lng** top-right longitude, *required*
-   - **tr_lat** top-right latitude, *required*
-   - **startDate** minimum download date in milliseconds, *optional*
-   - **endDate** maximum download date in milliseconds, *optional*
+   - **bl_lng** bottom-left longitude, *number*, *required*
+   - **bl_lat** bottom-left latitude, *number*, *required*
+   - **tr_lng** top-right longitude, *number*, *required*
+   - **tr_lat** top-right latitude, *number*, *required*
+   - **startDate** minimum download date in milliseconds, *number*, *optional*
+   - **endDate** maximum download date in milliseconds, *number*, *optional*
 2. `/api/download/getMonthly?year=2019`
+   - **year** months of the year, *number*, *required*
 3. `/api/download/getByCountry`
 4. `/api/download/getByTimeOfDay`
 
