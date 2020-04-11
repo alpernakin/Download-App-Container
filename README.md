@@ -4,7 +4,7 @@ Real-time and historical **download** data represantation. There are two major c
 
 **Frontend**: A mobile application, implemented with Ionic, Angular, Jasmine, Karma. The application represents real-time and historical download points on a map, and shows example statistics comparisons.
 
-**Backend**: API, implemented with ExpressJ, Mongoose, Socket.io, Chai and Mocha. The API serves the download points and streams them. Besides that, it serves some statistics data.
+**Backend**: API, implemented with ExpressJs, Mongoose, Socket.io, Chai and Mocha. The API serves the download points and streams them. Besides that, it serves some statistics data.
 
 **Data-Producer**: Feeds the Mongo database with dummy data. This app is well important for testing real-time data streaming.
 
